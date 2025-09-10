@@ -4,6 +4,6 @@ Simulations with ridge. Let ß be a real vector of length p and let x, y be rand
 
 ##### See Problem.png for the problem set
 
-  -  4a is a theoretical proof (Solution_4a.png)
-  -  4b requires simulating data using computational programming (Solution_4b.pdf)
-  -  Source code for 4b is locate in Solution_4b.qmd
+  -  4a is a theoretical proof (Solution-4a.png)
+  -  4b requires simulating data using computational programming (Solution-4b.pdf)
+  -  Source code for 4b is locate in Solution-4b.qmd
