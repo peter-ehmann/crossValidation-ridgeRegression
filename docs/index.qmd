@@ -1,7 +1,28 @@
 ---
 title: "Solution 4b"
-format: html
+author: "Peter Ehmann"
+date: '`r Sys.Date()`'
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: true
+    toc-depth: 3
+    number-sections: false
+    number-depth: 3
+    code-fold: true
+    theme: zephyr
+    grid:
+      sidebar-width: 250px
+      body-width: 1250px
+      margin-width: 100px
+      gutter-width: 1.5rem
 editor: visual
+execute: 
+  echo: true
+  message: false
+  warning: false
+  output: asis
 ---
 
 ```{r}
