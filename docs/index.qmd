@@ -26,23 +26,26 @@ execute:
 ---
 
 ```{r}
-# HW1 Problem 4b
 set.seed(12345)
-folds <- 10
 
 # create data matrix of 1000 observations of 10000 Rademacher random variables
 # Rademacher RV has P(-1) = 0.5 and P(+1) = 0.5
-n <- 10
-p <- 100
-x <- as.matrix(matrix(ifelse(runif(n*p, -1, 1) < 0, -1, 1), nrow = n, ncol = p))
 
-# output vector is the sum of the data rows (i.e., beta is vector of 1's)
-y <- as.matrix(rowSums(x))
+# terms of the problem statment
+folds <- 10
+n     <- 1000
+p     <- 10000
+x     <- ifelse(runif(n = n*p, min = -1, max  = 1) < 0, -1, 1)
+e     <- stats::rnorm(n = n*p, mean = 0, sd = 1)
+mat   <- as.matrix(matrix(x+e, nrow = n, ncol = p))
 
-# create vector of lambdas
+# beta is a vector of 1's - therefore we can sum the rows to calculate Y
+y <- as.matrix(rowSums(mat))
+
+# create vector of 13 lambdas - defined by problem
 lambdas <- c(0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100)
 
-# initialize matrices for each fold of each lambda
+# initialize matrices of results for each fold of each lambda
 train_mse <- matrix(0, nrow = folds, ncol = length(lambdas))
 colnames(train_mse) <- lambdas
 test_mse <- matrix(0, nrow = folds, ncol = length(lambdas))
@@ -55,15 +58,15 @@ for (i in 1:length(lambdas)) {
   # initialize size of each 10-fold CV (1000/10 = 100)
   k <- n/folds
   # create index vector (1-1000 shuffled randomly)
-  index <- sample(c(1:1000))
+  index <- sample(c(1:1000), replace = FALSE)
   # loop through 10 folds
   for (j in 1:folds) {
     # create k'th fold split indeces
     fold <- index[(k-99):k]
     k <- k+100
     # split data
-    x_train <- x[-fold,]
-    x_test <- x[fold,]
+    x_train <- mat[-fold,]
+    x_test <- mat[fold,]
     y_train <- y[-fold,]
     y_test <- y[fold,]
     # fit ridge regression model
